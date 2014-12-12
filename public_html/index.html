@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScrip Closures</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/javascript">
+
+            /**
+             * 
+             * @param {Number} level level of recursion
+             * @param {String} indent
+             * 
+             * @returns {String} Function definition
+             */
+            function createRecersiveFunction(level, indent) {
+                var newFunctionName = new Array(level + 1).join("烫");
+                var childFunctionName = new Array(level).join("烫");
+                var localVariableName = (new Array(level + 1)).join("哈");
+
+                if (level > 1) {
+                    return ""
+                            + indent + "function " + newFunctionName + "(){"
+                            + indent + "var " + localVariableName + ";" + "eval();"
+                            + indent + createRecersiveFunction(level - 1, indent + "\t")
+                            + indent + "\t" + childFunctionName + "();"
+                            + indent + "}\n";
+                } else if (level === 1) {
+                    return ""
+                            + indent + "function " + newFunctionName + "(){"
+                            + indent + "\teval();debugger;"
+                            + indent + "}\n";
+                } else {
+                    return "";
+                }
+            }
+
+            var func_text = createRecersiveFunction(6, "\n");
+            console.info(func_text);
+            eval("(" + func_text + ")()");
+
+        </script>
+    </head>
+    <body></body>
+</html>
